@@ -19,6 +19,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/pipindex/core"
+        },
+        {
+            "type":"vcs",
+            "url": "https://github.com/romanzpolski/flarum-ext-shawTheme"
         }
     ],
     "support": {
@@ -45,7 +49,12 @@
         "flarum/flarum-ext-sticky": "^0.1.0",
         "flarum/flarum-ext-subscriptions": "^0.1.0",
         "flarum/flarum-ext-suspend": "^0.1.0",
-        "flarum/flarum-ext-tags": "^0.1.0"
+        "flarum/flarum-ext-tags": "^0.1.0",
+        "wuethrich44/flarum-ext-sso": "^1.1",
+        "romanzpolski/flarum-ext-shawTheme": "*@dev",
+        "sijad/flarum-ext-pages": "dev-master",
+        "davis/flarum-ext-customfooter": "dev-master",
+        "avatar4eg/flarum-ext-users-list": "dev-master"
     },
     "require-dev": {
         "franzl/studio": "^0.11.0"
