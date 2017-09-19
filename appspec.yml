@@ -1,0 +1,17 @@
+version: 0.0
+os: linux
+
+files:
+  - source: /
+    destination: /home/ubuntu/flarum/
+
+hooks:
+  BeforeInstall:
+    - location: deployment_scripts/deregister_from_elb.sh
+    - location: deployment_scripts/stop_nginx.sh
+    - location: deployment_scripts/pre_install.sh
+  AfterInstall:
+    - location: deployment_scripts/post_install.sh
+  ApplicationStart:
+    - location: deployment_scripts/start_nginx.sh 
+    - location: deployment_scripts/register_with_elb.sh
