@@ -34,7 +34,7 @@ class SSOController
         }
 
         $this->setRememberMeCookie($token);
-        $fullNameIdentifier = $this->masqueradeUtils->getIdentifierForThisField($token, 'Full Name');
+        $fullNameIdentifier = $this->masqueradeUtils->getFieldNameIdentifiersMap($token)['Full Name'];
         $this->masqueradeUtils->sendPostRequest($token, [intval($fullNameIdentifier) => $fullName]);
     }
 

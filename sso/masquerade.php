@@ -2,6 +2,8 @@
 
 class MasqueradeUtils {
 
+    const MASQUERADE_CONFIGURE_ENDPOINT = '/api/masquerade/configure';
+
     private $config;
 
     public function __construct()
@@ -11,7 +13,7 @@ class MasqueradeUtils {
 
     public function sendPostRequest($token, $data)
     {
-        $path = '/api/masquerade/configure';
+        $path = self::MASQUERADE_CONFIGURE_ENDPOINT;
         $data_string = json_encode($data);
 
         $ch = curl_init($this->config['flarum_url'] . $path);
@@ -30,7 +32,7 @@ class MasqueradeUtils {
 
     public function getMasqueradeConfigs($token)
     {
-        $path = '/api/masquerade/configure';
+        $path = self::MASQUERADE_CONFIGURE_ENDPOINT;
 
         $ch = curl_init($this->config['flarum_url'] . $path);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
@@ -44,15 +46,15 @@ class MasqueradeUtils {
         return json_decode($result, true);
     }
 
-    public function getIdentifierForThisField($token, $fieldName) {
+    public function getFieldNameIdentifiersMap($token) {
 
         $fields = $this->getMasqueradeConfigs($token)['data'];
+        $fieldNameIdentifiersMap = array();
         foreach ($fields as $field) {
-            $targetFieldName = $field['attributes']['name'];
-            if ($targetFieldName == $fieldName) return $field['id'];
+            $targetFieldAttributes = $field['attributes'];
+            $fieldNameIdentifiersMap[$targetFieldAttributes['name']] = intval($targetFieldAttributes['id']);
         }
-
-
+        return $fieldNameIdentifiersMap;
     }
 
 }
