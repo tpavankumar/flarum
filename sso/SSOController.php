@@ -1,14 +1,18 @@
 <?php
 
+require_once('masquerade.php');
+
 class SSOController
 {
     const REMEMBER_ME_KEY = 'flarum_remember';
 
     private $config;
+    private $masqueradeUtils;
 
     public function __construct()
     {
         $this->config = require __DIR__ . '/config.php';
+        $this->masqueradeUtils = new MasqueradeUtils();
     }
 
     /**
@@ -17,8 +21,9 @@ class SSOController
      * @param $username
      * @param $email
      * @param $avatarUrl
+     * @return string $token
      */
-    public function login($username, $email, $avatarUrl)
+    public function login($username, $email, $avatarUrl, $fullName)
     {
         $password = $this->createPassword($username);
         $token = $this->getToken($username, $password);
@@ -29,6 +34,8 @@ class SSOController
         }
 
         $this->setRememberMeCookie($token);
+        $fullNameIdentifier = $this->masqueradeUtils->getFieldNameIdentifiersMap($token)['Full Name'];
+        $this->masqueradeUtils->sendPostRequest($token, [intval($fullNameIdentifier) => $fullName]);
     }
 
     /**

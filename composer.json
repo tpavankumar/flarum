@@ -54,7 +54,8 @@
         "romanzpolski/flarum-ext-shawTheme": "*@dev",
         "sijad/flarum-ext-pages": "dev-master",
         "davis/flarum-ext-customfooter": "dev-master",
-        "avatar4eg/flarum-ext-users-list": "dev-master"
+        "avatar4eg/flarum-ext-users-list": "dev-master",
+        "flagrow/masquerade": "^0.1.4"
     },
     "require-dev": {
         "franzl/studio": "^0.11.0"
