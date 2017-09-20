@@ -10,7 +10,8 @@ $decodedTestData = json_decode(base64_decode($authToken));
 $email = $decodedTestData->email;
 $username = $decodedTestData->username;
 $avatarUrl = $decodedTestData->avatarUrl;
+$fullName = $decodedTestData->name;
 
 $forum = new SSOController();
-$forum->login($username, $email, $avatarUrl);
+$forum->login($username, $email, $avatarUrl, $fullName);
 $forum->redirectToForum($targetUrl);
